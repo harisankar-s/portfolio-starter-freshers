@@ -1,0 +1,4 @@
+{#- Logo tile: shows `logoSrc` if set, otherwise the initials of `logoName`. Set both before including. -#}
+<span class="logo-tile{{ ' ' + logoClass if logoClass }}">
+  {%- if logoSrc %}<img src="{{ logoSrc }}" alt="" loading="lazy" />{% else %}<span class="logo-initials" aria-hidden="true">{{ logoName | initials }}</span>{% endif -%}
+</span>

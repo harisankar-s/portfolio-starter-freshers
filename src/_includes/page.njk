@@ -1,0 +1,11 @@
+---
+layout: base.njk
+---
+{#- Simple layout for extra Markdown pages (e.g. src/uses.md). Front matter: layout: page.njk, title, description. -#}
+<header class="page-header wrap-reading">
+  <h1 class="h1">{{ title }}</h1>
+  {% if description %}<p class="lede">{{ description }}</p>{% endif %}
+</header>
+<div class="prose wrap-reading">
+  {{ content | safe }}
+</div>

@@ -1,0 +1,135 @@
+{
+  "_help": "Everything on the page comes from this file. Empty any list (e.g. \"internships\": []) to hide that section. 'logo' and 'image' fields are optional.",
+
+  "name": "Priya Sharma",
+  "firstName": "Priya",
+  "headline": "Computer Science Graduate · Aspiring Software Engineer",
+  "location": "Pune, India",
+  "photo": "/images/profile/avatar.svg",
+  "status": "Open to entry-level roles & internships",
+
+  "intro": "I'm a final-year Computer Science student who loves building web apps and solving problems with code. I'm looking for my first full-time role as a software engineer.",
+
+  "about": [
+    "I got into programming by building small tools for my college fest, and I haven't stopped since. I enjoy turning an idea into something people can actually click on.",
+    "I learn fastest by building: most of what I know comes from the projects below. I'm comfortable working in a team, asking questions early, and picking up new tools quickly."
+  ],
+
+  "interests": ["Web development", "Backend APIs", "Data structures & algorithms", "Cloud basics", "Open source"],
+
+  "stats": [
+    { "value": "8.7", "label": "CGPA" },
+    { "value": "6", "label": "projects built" },
+    { "value": "2", "label": "internships" },
+    { "value": "400+", "label": "problems solved" }
+  ],
+
+  "education": [
+    {
+      "degree": "B.Tech, Computer Science & Engineering",
+      "school": "Your College of Engineering",
+      "dates": "2022 — 2026",
+      "score": "CGPA 8.7 / 10",
+      "logo": "",
+      "details": ["Relevant coursework: Data Structures, DBMS, Operating Systems, Computer Networks, OOP", "Technical lead, college coding club"]
+    },
+    {
+      "degree": "Class XII (CBSE), Science",
+      "school": "Your School",
+      "dates": "2022",
+      "score": "92%",
+      "logo": "",
+      "details": []
+    }
+  ],
+
+  "projects": [
+    {
+      "name": "Campus Connect",
+      "description": "A web app where students find study partners and share notes by course.",
+      "highlights": [
+        "Built REST APIs with authentication and role-based access",
+        "Used by 300+ students in the first semester",
+        "Deployed on Render with a PostgreSQL database"
+      ],
+      "stack": ["React", "Node.js", "Express", "PostgreSQL"],
+      "github": "https://github.com/your-handle/campus-connect",
+      "demo": "",
+      "image": ""
+    },
+    {
+      "name": "Expense Tracker",
+      "description": "A mobile-friendly app to log daily spending and see monthly charts.",
+      "highlights": [
+        "Charts built with Chart.js, data stored in the browser",
+        "Works offline as a progressive web app"
+      ],
+      "stack": ["JavaScript", "HTML", "CSS", "Chart.js"],
+      "github": "https://github.com/your-handle/expense-tracker",
+      "demo": "https://your-handle.github.io/expense-tracker",
+      "image": ""
+    },
+    {
+      "name": "Movie Recommender",
+      "description": "Suggests movies from a user's favourites using content-based filtering.",
+      "highlights": [
+        "Cleaned and vectorised a 5,000-movie dataset",
+        "Simple Streamlit front end for trying it out"
+      ],
+      "stack": ["Python", "Pandas", "scikit-learn", "Streamlit"],
+      "github": "https://github.com/your-handle/movie-recommender",
+      "demo": "",
+      "image": ""
+    }
+  ],
+
+  "internships": [
+    {
+      "company": "Acme Technologies",
+      "role": "Software Engineering Intern",
+      "dates": "May 2025 — Jul 2025",
+      "logo": "",
+      "description": "Worked on the internal dashboard team.",
+      "highlights": [
+        "Added filtering and CSV export to the orders dashboard",
+        "Wrote unit tests that raised coverage from 40% to 65%"
+      ]
+    },
+    {
+      "company": "Startup Labs",
+      "role": "Web Development Intern",
+      "dates": "Dec 2024 — Jan 2025",
+      "logo": "",
+      "description": "Built landing pages and fixed bugs on the company website.",
+      "highlights": []
+    }
+  ],
+
+  "skills": {
+    "Languages": ["Java", "Python", "JavaScript", "C", "SQL"],
+    "Web": ["HTML", "CSS", "React", "Node.js", "Express"],
+    "Tools": ["Git", "GitHub", "VS Code", "Postman", "Linux"],
+    "Databases & Cloud": ["MySQL", "PostgreSQL", "MongoDB", "AWS basics"],
+    "Soft skills": ["Teamwork", "Communication", "Problem solving"]
+  },
+
+  "certifications": [
+    { "name": "AWS Cloud Practitioner", "issuer": "Amazon Web Services", "issued": "2025", "url": "", "logo": "" },
+    { "name": "Java Programming", "issuer": "NPTEL", "issued": "2024", "url": "", "logo": "" },
+    { "name": "Responsive Web Design", "issuer": "freeCodeCamp", "issued": "2023", "url": "", "logo": "" }
+  ],
+
+  "achievements": [
+    { "title": "Finalist, Smart India Hackathon", "description": "Built a crop-price prediction app with a team of six.", "date": "2025" },
+    { "title": "400+ problems on LeetCode", "description": "Consistent practice in arrays, graphs and dynamic programming.", "date": "2024 — 2026" },
+    { "title": "Organiser, college tech fest", "description": "Ran the coding contest for 500+ participants.", "date": "2024" }
+  ],
+
+  "contact": {
+    "email": "you@example.com",
+    "heading": "Let's talk",
+    "text": "I'm looking for entry-level software roles and internships. I'd love to hear from you.",
+    "resume": "/files/resume.pdf",
+    "note": ""
+  }
+}

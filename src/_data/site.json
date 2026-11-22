@@ -1,0 +1,27 @@
+{
+  "_help": "Site-wide settings. Facts about YOU (education, projects, skills, ...) live in profile.json.",
+
+  "title": "Priya Sharma",
+  "description": "Priya Sharma — Computer Science graduate and aspiring software engineer. Projects, skills and résumé.",
+  "url": "https://your-site.netlify.app",
+  "language": "en",
+
+  "accentColor": "#2563EB",
+  "accentTextColor": "#FFFFFF",
+
+  "nav": [
+    { "label": "About", "url": "/#about" },
+    { "label": "Education", "url": "/#education" },
+    { "label": "Projects", "url": "/#projects" },
+    { "label": "Skills", "url": "/#skills" }
+  ],
+  "navCta": { "label": "Contact", "url": "/#contact" },
+
+  "social": [
+    { "name": "LinkedIn", "icon": "linkedin", "url": "https://www.linkedin.com/in/your-handle/" },
+    { "name": "GitHub", "icon": "github", "url": "https://github.com/your-handle" },
+    { "name": "LeetCode", "icon": "code", "url": "" },
+    { "name": "X", "icon": "x", "url": "" },
+    { "name": "Email", "icon": "email", "url": "mailto:you@example.com" }
+  ]
+}

@@ -1,0 +1,7 @@
+<footer class="footer">
+  {% include "partials/social.njk" %}
+  <p>
+    © {% year %} {{ profile.name }}
+    {% for item in site.nav %} · <a href="{{ item.url }}">{{ item.label }}</a>{% endfor %}
+  </p>
+</footer>

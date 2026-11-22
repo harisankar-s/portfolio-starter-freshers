@@ -1,0 +1,47 @@
+{#- Shared page shell for every page: <head>, nav, footer, theme toggle.
+    Pages set `title`, `description` and (optionally) `ogType`, `bodyClass`. -#}
+{%- set pageTitle = (title + " — " + site.title) if title else (site.title + " — " + profile.headline) -%}
+{%- set pageDesc = description or site.description -%}
+<!DOCTYPE html>
+<html lang="{{ site.language or 'en' }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    /* Apply the saved / system colour theme before paint (no flash) */
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var theme = saved === 'light' || saved === 'dark' ? saved
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+  <title>{{ pageTitle }}</title>
+  <meta name="description" content="{{ pageDesc }}" />
+  <meta name="author" content="{{ profile.name }}" />
+  <meta property="og:title" content="{{ pageTitle }}" />
+  <meta property="og:description" content="{{ pageDesc }}" />
+  <meta property="og:type" content="{{ ogType or 'website' }}" />
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+  <meta property="og:image" content="{{ site.url }}{{ profile.photo }}" />
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  {#- One colour drives the whole theme: set accentColor in site.json -#}
+  <style>:root { --accent: {{ site.accentColor or '#2563EB' }}; --on-accent: {{ site.accentTextColor or '#FFFFFF' }}; }</style>
+</head>
+<body class="{{ bodyClass }}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% include "partials/nav.njk" %}
+  <main id="main">
+    {{ content | safe }}
+  </main>
+  {% include "partials/footer.njk" %}
+  <script src="/assets/js/theme.js" defer></script>
+</body>
+</html>

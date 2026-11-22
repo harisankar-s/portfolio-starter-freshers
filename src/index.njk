@@ -1,0 +1,188 @@
+---
+layout: base.njk
+permalink: /
+bodyClass: page-home
+---
+{#-
+  The whole site is this one page. All content comes from src/_data/profile.json.
+  Empty a list in that file (e.g. "internships": []) to hide its section.
+  To reorder sections, move the <section> blocks below.
+-#}
+{%- set p = profile -%}
+
+<!-- HERO -->
+<section class="hero">
+  {% if p.photo %}<img class="hero-photo" src="{{ p.photo }}" alt="{{ p.name }}" width="148" height="148" />{% endif %}
+  {% if p.status %}<p class="status"><span class="status-dot"></span>{{ p.status }}</p>{% endif %}
+  <h1 class="h1">Hi, I'm {{ p.firstName or p.name }}.</h1>
+  <p class="hero-role">{{ p.headline }}</p>
+  {% if p.location %}<p class="muted hero-location">📍 {{ p.location }}</p>{% endif %}
+  {% if p.intro %}<p class="lede">{{ p.intro }}</p>{% endif %}
+  <div class="ctas">
+    {% if p.contact.resume %}<a href="{{ p.contact.resume }}" class="btn btn-primary" target="_blank" rel="noopener">Download résumé</a>{% endif %}
+    {% if p.projects.length %}<a href="#projects" class="btn btn-secondary">See my projects</a>{% endif %}
+  </div>
+  {% include "partials/social.njk" %}
+</section>
+
+{% if p.stats.length %}
+<!-- AT A GLANCE -->
+<section class="band band-tight" aria-label="At a glance">
+  <ul class="stats">
+    {% for s in p.stats %}<li><strong>{{ s.value }}</strong><span>{{ s.label }}</span></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% if p.about.length %}
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="wrap wrap-narrow">
+    <h2 class="h2">About me</h2>
+    {% for para in p.about %}<p class="text">{{ para }}</p>{% endfor %}
+    {% if p.interests.length %}<ul class="chips chips-center">{% for f in p.interests %}<li>{{ f }}</li>{% endfor %}</ul>{% endif %}
+  </div>
+</section>
+{% endif %}
+
+{% if p.education.length %}
+<!-- EDUCATION -->
+<section id="education" class="band">
+  <div class="wrap wrap-narrow">
+    <h2 class="h2">Education</h2>
+    <ol class="timeline">
+      {% for e in p.education %}
+      <li class="item">
+        {% set logoSrc = e.logo %}{% set logoName = e.school %}{% set logoClass = "logo-tile-lg" %}
+        {% include "partials/logo.njk" %}
+        <div>
+          <h3 class="item-title">{{ e.degree }}</h3>
+          <p class="item-meta"><strong>{{ e.school }}</strong>{% if e.dates %} · {{ e.dates }}{% endif %}</p>
+          {% if e.score %}<p class="score">{{ e.score }}</p>{% endif %}
+          {% if e.details.length %}<ul class="bullets">{% for d in e.details %}<li>{{ d }}</li>{% endfor %}</ul>{% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+{% endif %}
+
+{% if p.projects.length %}
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="wrap">
+    <h2 class="h2">Projects</h2>
+    <p class="sub">Things I've designed and built, with links to the code.</p>
+    <div class="grid grid-3">
+      {% for pr in p.projects %}
+      <article class="card project-card">
+        {% if pr.image %}<img class="project-image" src="{{ pr.image }}" alt="Screenshot of {{ pr.name }}" loading="lazy" />{% endif %}
+        <h3 class="card-title">{{ pr.name }}</h3>
+        <p class="card-text">{{ pr.description }}</p>
+        {% if pr.highlights.length %}<ul class="bullets">{% for h in pr.highlights %}<li>{{ h }}</li>{% endfor %}</ul>{% endif %}
+        {% if pr.stack.length %}<ul class="chips chips-sm">{% for t in pr.stack %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
+        {% if pr.github or pr.demo %}
+        <p class="project-links">
+          {% if pr.github %}<a class="link" href="{{ pr.github }}" target="_blank" rel="noopener">Code ↗</a>{% endif %}
+          {% if pr.demo %}<a class="link" href="{{ pr.demo }}" target="_blank" rel="noopener">Live demo ↗</a>{% endif %}
+        </p>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if p.internships.length %}
+<!-- INTERNSHIPS / EXPERIENCE -->
+<section id="experience" class="band">
+  <div class="wrap wrap-narrow">
+    <h2 class="h2">Internships</h2>
+    <ol class="timeline">
+      {% for job in p.internships %}
+      <li class="item">
+        {% set logoSrc = job.logo %}{% set logoName = job.company %}{% set logoClass = "logo-tile-lg" %}
+        {% include "partials/logo.njk" %}
+        <div>
+          <h3 class="item-title">{{ job.role }}</h3>
+          <p class="item-meta"><strong>{{ job.company }}</strong>{% if job.dates %} · {{ job.dates }}{% endif %}</p>
+          {% if job.description %}<p class="item-desc">{{ job.description }}</p>{% endif %}
+          {% if job.highlights.length %}<ul class="bullets">{% for h in job.highlights %}<li>{{ h }}</li>{% endfor %}</ul>{% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+{% endif %}
+
+{% if p.skills and (p.skills | length) %}
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="wrap">
+    <h2 class="h2">Skills</h2>
+    <div class="grid grid-2">
+      {% for group, items in p.skills %}
+      <div class="card">
+        <h3 class="card-title">{{ group }}</h3>
+        <ul class="chips">{% for it in items %}<li>{{ it }}</li>{% endfor %}</ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if p.certifications.length %}
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="band">
+  <div class="wrap">
+    <h2 class="h2">Certifications</h2>
+    <ul class="grid grid-auto">
+      {% for c in p.certifications %}
+      <li class="card card-center">
+        {% set logoSrc = c.logo %}{% set logoName = c.issuer %}{% set logoClass = "" %}
+        {% include "partials/logo.njk" %}
+        <span class="card-title">{{ c.name }}</span>
+        <span class="card-meta">{{ c.issuer }}{% if c.issued %} · {{ c.issued }}{% endif %}</span>
+        {% if c.url %}<a class="link" href="{{ c.url }}" target="_blank" rel="noopener">View certificate ↗</a>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if p.achievements.length %}
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="section">
+  <div class="wrap">
+    <h2 class="h2">Achievements</h2>
+    <div class="grid grid-3">
+      {% for a in p.achievements %}
+      <article class="card card-accent">
+        {% if a.date %}<span class="card-meta">{{ a.date }}</span>{% endif %}
+        <h3 class="card-title">{{ a.title }}</h3>
+        {% if a.description %}<p class="card-text">{{ a.description }}</p>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- CONTACT -->
+<section id="contact" class="band">
+  <div class="wrap wrap-narrow center">
+    <h2 class="h2">{{ p.contact.heading or "Get in touch" }}</h2>
+    {% if p.contact.text %}<p class="sub">{{ p.contact.text }}</p>{% endif %}
+    <div class="ctas">
+      <a href="mailto:{{ p.contact.email }}" class="btn btn-primary">Email me</a>
+      {% if p.contact.resume %}<a href="{{ p.contact.resume }}" class="btn btn-secondary" target="_blank" rel="noopener">Download résumé</a>{% endif %}
+    </div>
+    <p class="muted">{{ p.contact.email }}</p>
+    {% if p.contact.note %}<p class="muted">{{ p.contact.note }}</p>{% endif %}
+  </div>
+</section>
