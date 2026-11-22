@@ -13,6 +13,28 @@ Hero with your photo and a résumé button → quick stats (CGPA, projects…) �
 - Any section you leave empty is hidden automatically
 - Basic SEO built in: share previews, `sitemap.xml`, `robots.txt` and a 404 page
 
+## Preview
+
+This is what you get out of the box, filled with sample data you'll replace with your own.
+
+![Home page hero in light mode: photo, name, headline, résumé button and social links](docs/screenshots/hero-light.png)
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/hero-dark.png" alt="The same page in dark mode" /><br /><sub><b>Dark mode</b>, which follows the visitor's system setting and has a toggle</sub></td>
+    <td width="50%" align="center"><img src="docs/screenshots/mobile.png" alt="The page on a phone" width="260" /><br /><sub><b>On a phone</b>, the layout adapts to small screens</sub></td>
+  </tr>
+</table>
+
+![Projects section: three cards with description, highlights, tech stack and Code / Live demo links](docs/screenshots/projects.png)
+<sub><b>Projects</b>, the section recruiters look at most. Each card links to the code and a live demo.</sub>
+
+<details>
+<summary><b>See the whole page</b></summary>
+<br />
+<img src="docs/screenshots/full-page.png" alt="The full page from top to bottom: hero, stats, about, education, projects, internships, skills, certifications, achievements and contact" width="640" />
+</details>
+
 ---
 
 ## Step 1: Get it running on your computer
@@ -90,18 +112,80 @@ Export your résumé as a PDF and save it as `src/files/resume.pdf`, replacing t
 
 **Logos (optional):** you can give any college, company or certification a logo with `"logo": "/images/logos/name.png"`. Put the file in `src/images/logos/`. Without a logo, the item's initials are shown instead.
 
-## Step 3: Put it online for free
+## Step 3: Put it online for free with Netlify
 
-1. Create a GitHub account if you don't have one. Then create a new repository and push this folder to it.
-2. Sign in to [Netlify](https://www.netlify.com/) with GitHub and choose **Add new site → Import an existing project**, then pick your repository.
-3. Click **Deploy**. The settings are read from `netlify.toml`. You'll get an address like `your-name.netlify.app`, which you can rename under Site settings.
-4. Copy that address into `url` in `site.json` and push again.
+You'll end up with a live address like `https://priya-sharma.netlify.app` that updates every time you push to GitHub. It costs nothing, and you don't need a credit card.
 
-From then on, every `git push` updates your live site automatically.
+### 3a. Put your code on GitHub
 
-**Other free hosts:** on Vercel, set the build command to `npm run build` and the output directory to `_site`. On GitHub Pages, use a GitHub Actions workflow that runs `npm ci && npm run build` and publishes `_site/`.
+1. Create a free account at [github.com](https://github.com) if you don't have one.
+2. Go to [github.com/new](https://github.com/new) and name the repository (for example `portfolio`). Set it to **Public** and leave every "Add a README / .gitignore / license" box **unticked**. Click **Create repository**.
+3. In a terminal, inside your project folder, run these (replace `<your-username>`):
 
-**Your own domain:** buy one (for example `yourname.dev`) and add it under Netlify → Domain management.
+```bash
+git init -b main
+```
+
+```bash
+git add .
+```
+
+```bash
+git commit -m "My portfolio"
+```
+
+```bash
+git remote add origin https://github.com/<your-username>/portfolio.git
+```
+
+```bash
+git push -u origin main
+```
+
+> When `git push` asks for a password, paste a **personal access token**, not your GitHub password. Create one at GitHub → Settings → Developer settings → Personal access tokens → *Tokens (classic)* → Generate, and tick the `repo` scope.
+
+### 3b. Connect the repository to Netlify
+
+1. Go to [app.netlify.com](https://app.netlify.com) and click **Sign up → Sign up with GitHub**.
+2. On your dashboard, click **Add new site → Import an existing project**.
+3. Choose **GitHub** and allow Netlify to access your account. You can give it access to just this one repository.
+4. Pick your `portfolio` repository.
+5. Netlify fills in the build settings from `netlify.toml`. Check that they read:
+
+   | Setting | Value |
+   | --- | --- |
+   | Branch to deploy | `main` |
+   | Build command | `npm run build` |
+   | Publish directory | `_site` |
+
+6. Click **Deploy**. After about a minute the status changes to **Published** and you get a link like `https://random-name-123.netlify.app`. Open it: that's your site, live.
+
+### 3c. Give it a proper name
+
+1. In Netlify, open **Site configuration → Change site name** and enter something like `priya-sharma`. Your address becomes `https://priya-sharma.netlify.app`.
+2. Put that address in `url` in `src/_data/site.json`, then commit and push:
+
+```bash
+git commit -am "Set site URL"
+```
+
+```bash
+git push
+```
+
+From now on, **every `git push` redeploys your site automatically**. Netlify's **Deploys** tab shows each build and its logs.
+
+### 3d. (Optional) Use your own domain
+
+Buy a domain (for example `priyasharma.dev`) from any registrar, then go to Netlify → **Domain management → Add a domain** and follow the steps. Netlify sets up HTTPS for you for free.
+
+### If the deploy fails
+
+- **"Build failed" in the Deploys tab:** open the log and scroll to the first red line. It's usually a typo in `profile.json`, such as a missing comma or quote. Paste the file into [jsonlint.com](https://jsonlint.com) to find it.
+- **The page loads but looks unstyled:** make sure the publish directory is `_site`, not `src`.
+- **Old content still showing:** hard-refresh with Ctrl+Shift+R (Cmd+Shift+R on Mac).
+
+**Prefer another host?** On Vercel, import the repo and set the output directory to `_site`. On GitHub Pages, use a GitHub Actions workflow that runs `npm ci && npm run build` and publishes `_site/`.
 
 ## Before you share it
 
@@ -131,6 +215,7 @@ src/
 ├── assets/js/theme.js  ← light/dark toggle
 └── 404.njk, sitemap.njk, robots.njk
 scripts/setup.js        ← the setup wizard
+docs/screenshots/       ← images used in this README (safe to delete)
 ```
 
 ## Going further
